@@ -1,0 +1,67 @@
+NAME
+    Filesys::Cap - Test filesystem capabilities/characteristics
+
+VERSION
+    This document describes version 0.01 of Filesys::Cap (from Perl
+    distribution Filesys-Cap), released on 2014-06-26.
+
+SYNOPSIS
+     use Filesys::Cap qw(fs_has_attr_x fs_is_ci fs_is_cs);
+
+     say "Filesystem has x attribute"     if fs_has_attr_x();
+     say "Filesystem is case-insensitive" if fs_is_ci("/tmp");
+     say "Filesystem is case-sensitive"   if fs_is_cs("/tmp");
+
+FUNCTIONS
+  fs_has_attr_x([ $dir ]) => bool
+    Return true if filesystem has x attribute, meaning it can have files
+    that pass "-x" Perl file test operator as well as files that fail it.
+    This is done by creating two temporary files under $dir, one chmod-ed to
+    0644 and one to 0755 and test the two files.
+
+    If $dir is not specified, will use a temporary directory created by
+    "tempdir()".
+
+    Will return undef on failure.
+
+  fs_is_ci([ $dir ]) => bool
+    Return true if filesystem is case-insensitive, meaning it is impossible
+    to create two files with the same name but differing case (e.g. "foo"
+    and "Foo"). This is done by creating two temporary files under $dir.
+
+    If $dir is not specified, will use a temporary directory created by
+    "tempdir()".
+
+    Will return undef on failure.
+
+  fs_is_cs([ $dir ]) => bool
+    The opposite of "fs_is_ci", will return true if filesystem is
+    case-sensitive.
+
+SEE ALSO
+    To list filesystems and their properties (so, the more proper/rigorous
+    version), see Sys::Filesystem.
+
+HOMEPAGE
+    Please visit the project's homepage at
+    <https://metacpan.org/release/Filesys-Cap>.
+
+SOURCE
+    Source repository is at <https://github.com/sharyanto/perl-Filesys-Cap>.
+
+BUGS
+    Please report any bugs or feature requests on the bugtracker website
+    <https://rt.cpan.org/Public/Dist/Display.html?Name=Filesys-Cap>
+
+    When submitting a bug or request, please include a test-file or a patch
+    to an existing test-file that illustrates the bug or desired feature.
+
+AUTHOR
+    Steven Haryanto <stevenharyanto@gmail.com>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2014 by Steven Haryanto.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
